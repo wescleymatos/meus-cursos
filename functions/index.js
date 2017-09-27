@@ -13,7 +13,7 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('public'));
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(path.resolve(path.dirname('')), 'views'));
 app.set('view engine', 'ejs');
 
 // const authorized = (email, pass, redirect, error) => {
@@ -24,11 +24,11 @@ app.set('view engine', 'ejs');
 //     .catch((error) => error);
 // };
 
-const insertUser = (user) => {
+const insertUser = () => {
   const ref = firebaseApp.database().ref('users');
 
-  return ref.set(user)
-}
+  return ref.set({nome: 'wescley', idade: 30});
+};
 
 app.get('/', (req, res) => {
   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
@@ -37,17 +37,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-  const user = {
-    users: [{
-      email: req.bady.email,
-      pass: req.body.pass
-    }]
-  }
-
-  insertUser(user)
-    .then(() => res.redirect('/dashboard/index'))
-    .catch(() => res.redirect('/account/index'));
-
+  insertUser();
 });
 
 app.get('/dashboard', (req, res) => {
