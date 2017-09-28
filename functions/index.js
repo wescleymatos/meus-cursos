@@ -1,12 +1,14 @@
+/*eslint no-console: "error"*/
+
 const functions = require('firebase-functions');
 const firebase = require('firebase-admin');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-const firebaseApp = firebase.initializeApp(
-  functions.config().firebase
-);
+// const firebaseApp = firebase.initializeApp(
+//   functions.config().firebase
+// );
 
 const app = express();
 
@@ -24,11 +26,11 @@ app.set('view engine', 'ejs');
 //     .catch((error) => error);
 // };
 
-const insertUser = () => {
-  const ref = firebaseApp.database().ref('users');
-
-  return ref.set({nome: 'wescley', idade: 30});
-};
+// const insertUser = () => {
+//   const ref = firebaseApp.database().ref('users');
+//
+//   ref.set({nome: 'wescley', idade: 30});
+// };
 
 app.get('/', (req, res) => {
   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
@@ -36,9 +38,9 @@ app.get('/', (req, res) => {
   res.render('account/index');
 });
 
-app.post('/', (req, res) => {
-  insertUser();
-});
+// app.post('/', (req, res) => {
+//   insertUser();
+// });
 
 app.get('/dashboard', (req, res) => {
   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');

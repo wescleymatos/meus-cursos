@@ -19,32 +19,40 @@
     </head>
     <body>
         <div class="container">
-            <form method="post" action="/" class="form-signin">
-                <h2 class="form-signin-heading">Please sign in</h2>
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" required>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <form class="form-signin">
+                <label for="email" class="sr-only">Email address</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required autofocus>
+                <label for="pass" class="sr-only">Password</label>
+                <input type="password" name="pass" id="pass" class="form-control" placeholder="Password" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Logar</button>
             </form>
         </div>
         <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
         <script>
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyAXEZMb-B-2k3wxfLwhiASaCdjKsuKQG-I",
-                authDomain: "meus-cursos-12c89.firebaseapp.com",
-                databaseURL: "https://meus-cursos-12c89.firebaseio.com",
-                projectId: "meus-cursos-12c89",
-                storageBucket: "meus-cursos-12c89.appspot.com",
-                messagingSenderId: "530033196075"
+            let form = document.querySelector('form');
+
+            const config = {
+                apiKey: "",
+                authDomain: "",
+                databaseURL: "",
+                projectId: "",
+                storageBucket: "",
+                messagingSenderId: ""
             };
             firebase.initializeApp(config);
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                let user = {
+                    email: form['email'].value,
+                    password: form['pass'].value
+                };
+
+                firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+                    .then((userLogged) => firebase.database().ref('users/').set(user))
+                    .catch((error) => console.log(error.code, error.message));
+            });
         </script>
     </body>
 </html>
