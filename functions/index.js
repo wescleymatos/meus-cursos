@@ -1,4 +1,4 @@
-/*eslint no-console: "error"*/
+/*eslint no-console: ["error", { allow: ["log"] }]*/
 
 const functions = require('firebase-functions');
 const firebase = require('firebase-admin');
@@ -6,9 +6,9 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-// const firebaseApp = firebase.initializeApp(
-//   functions.config().firebase
-// );
+const firebaseApp = firebase.initializeApp(
+  functions.config().firebase
+);
 
 const app = express();
 
@@ -26,11 +26,11 @@ app.set('view engine', 'ejs');
 //     .catch((error) => error);
 // };
 
-// const insertUser = () => {
-//   const ref = firebaseApp.database().ref('users');
-//
-//   ref.set({nome: 'wescley', idade: 30});
-// };
+const insertUser = (collection, data) => {
+  const ref = firebaseApp.database().ref(collection).push();
+
+  ref.set(data);
+};
 
 app.get('/', (req, res) => {
   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
@@ -38,9 +38,11 @@ app.get('/', (req, res) => {
   res.render('account/index');
 });
 
-// app.post('/', (req, res) => {
-//   insertUser();
-// });
+app.post('/', (req, res) => {
+  insertUser('users/', {nome: 'wescley alves matos', idade: 40});
+
+  res.send({msg: 'Ok!'})
+});
 
 app.get('/dashboard', (req, res) => {
   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
