@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-  insertUser('users/', {nome: 'wescley alves matos', idade: 40});
+  insertUser('users/', {nome: req.body.nome, idade: req.body.idade});
 
   res.send({msg: 'Ok!'})
 });

@@ -47,7 +47,8 @@
 
                 let user = {
                     email: form['email'].value,
-                    password: form['pass'].value
+                    password: form['pass'].value,
+                    dateTime: Date.Now()
                 };
 
                 firebase.auth().signInWithEmailAndPassword(user.email, user.password)
