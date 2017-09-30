@@ -1,5 +1,3 @@
-/*eslint no-console: ["error", { allow: ["log"] }]*/
-
 const functions = require('firebase-functions');
 const firebase = require('firebase-admin');
 const express = require('express');
@@ -18,13 +16,6 @@ app.use(express.static('public'));
 app.set('views', path.join(path.resolve(path.dirname('')), 'views'));
 app.set('view engine', 'ejs');
 
-// const authorized = (email, pass, redirect, error) => {
-//   firebaseApp
-//     .auth()
-//     .signInWithEmailAndPassword(email, pass)
-//     .then(() => 'deu certo')
-//     .catch((error) => error);
-// };
 
 const insertUser = (collection, data) => {
   const ref = firebaseApp.database().ref(collection).push();
