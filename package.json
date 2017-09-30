@@ -1,0 +1,19 @@
+{
+  "name": "meus-cursos-front",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wescleymatos/meus-cursos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wescleymatos/meus-cursos/issues"
+  },
+  "homepage": "https://github.com/wescleymatos/meus-cursos#readme"
+}
